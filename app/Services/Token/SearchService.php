@@ -21,7 +21,7 @@ class SearchService
             return $query;
         });
         if (array_key_exists('page', $params)) {
-            return $query->simplePaginate(2);
+            return $query->simplePaginate(10);
         }
         
         return $query->get();

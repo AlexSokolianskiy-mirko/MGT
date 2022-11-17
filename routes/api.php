@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\TokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('tokens', [TokenController::class, 'index']);
+Route::post('points/allowed', [PointController::class, 'index']);
