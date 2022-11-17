@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\TokenController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ use App\Http\Controllers\TokenController;
 Route::get('tokens', [TokenController::class, 'index']);
 Route::get('token/neighbor', [TokenController::class, 'neighbor']);
 Route::post('points/allowed', [PointController::class, 'index']);
+
+Route::fallback(function (){
+    throw new NotFoundHttpException('Route not found');
+});
