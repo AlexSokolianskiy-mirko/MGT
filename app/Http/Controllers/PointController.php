@@ -11,9 +11,11 @@ class PointController extends Controller
     public function index(PointAllowedRequest $request, DistanceService $distanceService)
     {
         $point = $request->validated();
-
+        $primary = $distanceService->parseCoordinates($point['point'][1]);
+        $secondary = $distanceService->parseCoordinates($point['point'][2]);
+        
         return response()->json([
-            'allowed' => $distanceService->allowed($point['point'][1], $point['point'][2])
+            'allowed' => $distanceService->allowed($primary, $secondary)
         ]);
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Services\Token;
 
 use App\Models\Token;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use App\Services\Point\DistanceService;
+use Illuminate\Database\Eloquent\Builder;
+use MatanYadaev\EloquentSpatial\Objects\Point;
 
 class SearchService
 {
@@ -25,5 +27,19 @@ class SearchService
         }
         
         return $query->get();
+    }
+
+    public function getNeighbors(Point $point) : array
+    {
+        $distanceService = new DistanceService();
+        $tokens = Token::all();
+        $result = [];
+        foreach ($tokens as $token) {
+            if ($distanceService->allowed($token->location, $point)) {
+                $result[] = $token;
+            }
+        }
+
+        return $result;
     }
 }

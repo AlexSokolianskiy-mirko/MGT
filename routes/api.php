@@ -17,4 +17,5 @@ use App\Http\Controllers\TokenController;
 */
 
 Route::get('tokens', [TokenController::class, 'index']);
+Route::get('token/neighbor', [TokenController::class, 'neighbor']);
 Route::post('points/allowed', [PointController::class, 'index']);

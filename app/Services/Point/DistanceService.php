@@ -8,12 +8,15 @@ class DistanceService
 {
     const EARTH_RADIUS = 6371;
 
-    public function allowed(array $primaryPoint, array $secondaryPoint): bool
+    public function parseCoordinates(array $coordinates) 
     {
-        $primary = new Point($primaryPoint['ltd'], $primaryPoint['lng']);
-        $secondary = new Point($secondaryPoint['ltd'], $secondaryPoint['lng']);
-        $distance = $this->distance($primary, $secondary);
+        return new Point($coordinates['ltd'], $coordinates['lng']);
+    }
 
+    public function allowed(Point $primary, Point $secondary): bool
+    {
+        $distance = $this->distance($primary, $secondary);
+        
         return $distance <= config('constants.allowed_distance');
     }
 
