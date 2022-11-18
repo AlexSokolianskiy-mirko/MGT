@@ -33,9 +33,14 @@ class TokenObserver
      */
     public function updated(Token $token)
     {
-        $token->tags()->updateOrCreate(['name' => $token->name], [
-            'name' => $token->name
-        ]);
+        $tag = $token->tags()->where('name', $token->name)->first();
+
+        if (!$tag) {
+            $tag = new Tag([
+                'name' => $token->name,
+            ]);
+            $token->tags()->save($tag);
+        }
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Token;
 
 use App\Http\Resources\Point\PointResource;
+use App\Http\Resources\Tag\TagResource;
+use App\Models\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TokenResource extends JsonResource
@@ -18,7 +20,8 @@ class TokenResource extends JsonResource
         return [
             'name' => $this->name,
             'description' => $this->description,
-            'location' => new PointResource($this->location)
+            'location' => new PointResource($this->location),
+            'tags' => TagResource::collection($this->tags)
         ];
     }
 }

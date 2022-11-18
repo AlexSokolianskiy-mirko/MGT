@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Token::observe(TokenObserver::class);
+        // Token::observe(TokenObserver::class);
     }
 
     /**

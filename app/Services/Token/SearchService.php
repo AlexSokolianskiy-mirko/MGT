@@ -17,7 +17,9 @@ class SearchService
                 $query->where($key, $value);
             };
             if (!empty($params['filter']['tag'])) {
-                $query->whereRelation('tags', 'name', '=', $params['filter']['tag']);
+                $query->whereHas('tags', function ($query) use ($params) {
+                    return $query->where('tags.name', '=', $params['filter']['tag']);
+                });
             }
 
             return $query;
@@ -25,11 +27,10 @@ class SearchService
         if (array_key_exists('page', $params)) {
             return $query->simplePaginate(10);
         }
-        
         return $query->get();
     }
 
-    public function getNeighbors(Point $point) : array
+    public function getNeighbors(Point $point): array
     {
         $distanceService = new DistanceService();
         $tokens = Token::all();

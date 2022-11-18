@@ -23,7 +23,7 @@ class TokenController extends Controller
         $data = $request->validated();
         $point = $distanceService->parseCoordinates($data);
 
-        //search neighbors was implented in task description way
+        //search neighbors was implemented as in task description way
         //but there is exists another way to calculate distance between points 
         //https://dev.mysql.com/doc/refman/5.7/en/spatial-convenience-functions.html#function_st-distance-sphere
         return TokenResource::collection($searchService->getNeighbors($point));

@@ -16,7 +16,8 @@ class TokenSearchRequest extends FormRequest
         return [
             'filter.name' => 'filled|string',
             'filter.description' => 'filled|string',
-            'filter.tag' => 'filled|string',
+            'filter.tag' => 'array|filled',
+            'filter.tag.*' => 'string',
             'page' => 'integer|nullable'
         ];
     }
